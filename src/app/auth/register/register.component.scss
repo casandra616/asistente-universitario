@@ -1,0 +1,143 @@
+// Estilos para el contenedor con efecto cristal (Glassmorphism)
+$cyan-brillante: #80e5ff;
+$borde-cristal: rgba(128, 229, 255, 0.45);
+$fondo-cristal: rgba(255, 255, 255, 0.06);
+$texto-blanco: #ffffff;
+
+// Estrellas del fondo (se dibujan con código, no necesitan imágenes)
+$estrella: "M12 1l3.1 7.2 7.9.7-6 5.2 1.8 7.7L12 17.8 5.2 21.8 7 14.1 1 8.9l7.9-.7z";
+$estrellas-fondo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cg fill='%2380e5ff'%3E%3Cpath transform='translate(30 40) scale(.7)' d='#{$estrella}'/%3E%3Cpath transform='translate(210 90) scale(.5)' d='#{$estrella}'/%3E%3Cpath transform='translate(120 220) scale(.9)' d='#{$estrella}'/%3E%3C/g%3E%3Cg fill='%23ffd84d'%3E%3Cpath transform='translate(250 230) scale(.6)' d='#{$estrella}'/%3E%3Cpath transform='translate(90 130) scale(.4)' d='#{$estrella}'/%3E%3C/g%3E%3C/svg%3E");
+
+.glass-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #1e3c52 0%, #0b131a 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+
+  // Dos capas de estrellas con tamaños y tiempos distintos
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: $estrellas-fondo;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::before {
+    background-size: 260px 260px;
+    animation: titilar 4s ease-in-out infinite;
+  }
+
+  &::after {
+    background-size: 410px 410px;
+    background-position: 130px 90px;
+    animation: titilar 6s ease-in-out infinite 1.5s;
+  }
+}
+
+@keyframes titilar {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+
+.glass-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  background: $fondo-cristal;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid $borde-cristal;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5),
+              inset 0 0 15px rgba(128, 229, 255, 0.1);
+  text-align: center;
+
+  h2 {
+    color: $texto-blanco;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(128, 229, 255, 0.4);
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .input-group {
+    margin-bottom: 1.2rem;
+
+      input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1.5px solid $borde-cristal;
+      border-radius: 8px;
+      color: $texto-blanco;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      &:focus {
+        border-color: $cyan-brillante;
+        box-shadow: 0 0 10px rgba(128, 229, 255, 0.4);
+      }
+    }
+  }
+
+  .btn-register {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #10b981;
+    color: $texto-blanco;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: #059669;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.7);
+    }
+  }
+
+  .login-redirect {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+
+    a {
+      color: $cyan-brillante;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

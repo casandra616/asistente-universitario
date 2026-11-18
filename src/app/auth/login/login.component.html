@@ -1,0 +1,37 @@
+<div class="glass-container">
+  <!-- Tarjeta principal con efecto cristal -->
+  <div class="glass-card">
+    
+    <!-- Título principal -->
+    <h2>INICIA SESIÓN</h2>
+    <p class="subtitle">Ingresa para continuar a tu plataforma</p>
+
+    <!-- Formulario -->
+    <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+      <!-- Campo de Correo -->
+      <div class="input-group">
+        <input  formControlName="email" type="email" placeholder="correo@ejemplo.com" required>
+      </div>
+
+      <!-- Campo de Contraseña -->
+      <div class="input-group">
+        <input formControlName="pass" type="password" placeholder="••••••••" required>
+      </div>
+
+      <!-- Botón Azul de Iniciar Sesión -->
+      <button type="submit" class="btn-login">INICIAR SESIÓN</button>
+    </form>
+
+    <div class="login-failed" *ngIf="!isLogin " >
+        <p>login incorrecto!!</p>
+      </div>
+
+    <!-- Separador o texto secundario -->
+    <div class="divider">¿No tienes cuenta?</div>
+
+    <!-- Botón Verde de Registrarse -->
+    <button type="button" class="btn-register" routerLink="/auth/register">REGISTRARSE</button>
+    
+
+  </div>
+</div>
